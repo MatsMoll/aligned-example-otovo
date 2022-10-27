@@ -1,6 +1,6 @@
-# Aladdin Example
+# Aligned Example
 
-This is an example repo, showing how `aladdinml` can be used.
+This is an example repo, showing how `aligned` can be used.
 
 The repo contains a directory describing some feature views, model services, has a feature store file, a data source, and a notebook that shows a use-case.
 

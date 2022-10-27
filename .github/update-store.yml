@@ -1,0 +1,39 @@
+name: update store
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - uses: actions/cache@v3
+        id: cache-venv
+        with:
+          path: .venv
+          key: venv-2  # increment to reset
+      - run: |
+          python -m venv .venv --upgrade-deps
+          source .venv/bin/activate
+          pip install pre-commit
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+      - uses: actions/cache@v3
+        id: pre-commit-cache
+        with:
+          path: ~/.cache/pre-commit
+          key: key-0
+      - run: |
+          source .venv/bin/activate
+          pre-commit run --all-files
+      - name: Update Feature Store
+        run: aladdin apply
+        env:
+          AWS_ACCESS_TOKEN: ${{ secrets.AWS_ACCESS_TOKEN }}
+          AWS_SECRET_TOKEN: ${{ secrets.AWS_SECRET_TOKEN }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_BUCKET: ${{ secrets.AWS_BUCKET }}

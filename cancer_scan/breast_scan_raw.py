@@ -1,13 +1,13 @@
-from aladdin import FeatureView, FeatureViewMetadata, Entity, Int32, Float, String
-from feature_store_definition.source import breast_scan_file
+from aligned import FeatureView, FeatureViewMetadata, Entity, Int32, Float, String
+from cancer_scan.source import breast_scan_file, breast_scan_topic
 
 class BreastScanRawFeatureView(FeatureView):
 
     metadata = FeatureViewMetadata(
         name="breast_scans_raw",
         description="Features defining a scan and diagnose of potential cancer cells",
-        tags={},
-        batch_source=breast_scan_file
+        batch_source=breast_scan_file,
+        stream_source=breast_scan_topic
     )
 
     scan_id = Entity(dtype=Int32())
