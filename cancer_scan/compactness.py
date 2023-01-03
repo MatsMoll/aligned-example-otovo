@@ -15,7 +15,3 @@ class BreastScanCompactnessFeatureView(FeatureView):
     compactness_mean = Float()
     compactness_se = Float()
     compactness_worst = Float()
-
-    compactness_mean_scaled = compactness_mean.standard_scaled()
-    compactness_se_scaled = compactness_se.standard_scaled()
-    compactness_worst_scaled = compactness_worst.standard_scaled()

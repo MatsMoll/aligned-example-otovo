@@ -17,14 +17,4 @@ class BreastScanRadius(FeatureView):
     radius_worst = Float()
 
     # Can automatically set validation constraints mean ≈ 0 and most values should be within ±5 or what the 99 percentile is again
-    radius_se_scaled = radius_se.standard_scaled()
-    radius_mean_scaled = radius_mean.standard_scaled()
-    radius_worst_scaled = radius_worst.standard_scaled()
-
     radius_se_mean_ratio = radius_se / radius_mean
-
-    radius_is_between = radius_se_scaled.transformed(lambda df: df["radius_se_scaled"].between(left=10, right=20), as_dtype=Bool())
-    radius_depending_on_multiple = Float().transformed(
-        lambda df: df["radius_worst_scaled"] + df["radius_mean_scaled"] + df["radius_se_scaled"], 
-        using_features=[radius_worst_scaled, radius_mean_scaled, radius_se_scaled]
-    )

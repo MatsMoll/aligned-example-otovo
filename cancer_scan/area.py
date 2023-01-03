@@ -15,7 +15,3 @@ class BreastScanAreaFeatureView(FeatureView):
     area_mean = Float()
     area_se = Float()
     area_worst = Float()
-
-    area_mean_scaled = area_mean.standard_scaled()
-    area_se_scaled = area_se.standard_scaled()
-    area_worst_scaled = area_worst.standard_scaled()

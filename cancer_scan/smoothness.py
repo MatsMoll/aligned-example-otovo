@@ -15,7 +15,3 @@ class BreastScanSmoothnessFeatureView(FeatureView):
     smoothness_mean = Float()
     smoothness_se = Float()
     smoothness_worst = Float()
-
-    smoothness_mean_scaled = smoothness_mean.standard_scaled()
-    smoothness_se_scaled = smoothness_se.standard_scaled()
-    smoothness_worst_scaled = smoothness_worst.standard_scaled()
